@@ -26,5 +26,12 @@ public class UserDao {
 		return authUser;
 	
 	}
+	
+	public UserVo selectBlogUser(String id) {
+		System.out.println("[UserDao.selectBlogUser()]");
+		
+		UserVo blogUser = sqlSession.selectOne("user.selectBlogUser", id);		
+		return blogUser;
+	}
 
 }

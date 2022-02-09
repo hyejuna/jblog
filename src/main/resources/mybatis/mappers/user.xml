@@ -27,5 +27,14 @@
 		]]>
 	</select>
 	
+	<select id="selectBlogUser" parameterType="string" resultType = "com.javaex.vo.UserVo">
+		<![CDATA[
+			select  id,
+			        user_name userName
+			from users
+			where id = #{id}
+		]]>
+	</select>
+	
 	
 </mapper>
