@@ -29,27 +29,70 @@
 	
 	<select id="selectCateList" parameterType="string" resultType="com.javaex.vo.CategoryVo">
 		<![CDATA[
-			select  cate_no cateNo,
+			select  c.cate_no cateNo,
 			        cate_name cateName,
-			        description
-			from category
-			where id = #{id}
+			        description,
+			        nvl(p.cnt,0) postCnt
+			from category c, (select cate_no, count(*) cnt
+			                  from post
+			                  group by cate_no)p
+			where c.cate_no = p.cate_no(+)
+			and id = #{id}
+			order by c.cate_no desc
 		]]>
 	
 	</select>
 	
 	<insert id="insertPost" parameterType="com.javaex.vo.PostVo">
 		<![CDATA[
-		insert into post
-		values(
-		    seq_post_no.nextval,
-		    #{cateNo},
-		    #{postTitle},
-		    #{postContent},
-		    sysdate
-		)
+			insert into post
+			values(
+			    seq_post_no.nextval,
+			    #{cateNo},
+			    #{postTitle},
+			    #{postContent},
+			    sysdate
+			)
 		]]>
 	</insert>
+	
+	<insert id="insertCate" parameterType="com.javaex.vo.CategoryVo">
+		<selectKey keyProperty="cateNo" resultType="int" order="BEFORE">	
+			select seq_category_no.nextval from dual
+		</selectKey>
+		<![CDATA[
+			insert into category
+			values(
+			    #{cateNo},
+			    #{id},
+			    #{cateName},
+			    #{description},
+			    sysdate
+			)
+		]]>
+	</insert>
+	
+	<select id="selectCate" parameterType="int" resultType="com.javaex.vo.CategoryVo">
+		<![CDATA[
+			select  c.cate_no cateNo,
+			        cate_name cateName,
+			        description,
+			        nvl(p.cnt,0) postCnt
+			from category c, (select cate_no, count(*) cnt
+			                  from post
+			                  group by cate_no)p
+			where c.cate_no = p.cate_no(+)
+			and c.cate_no = #{no}
+			order by c.cate_no desc
+		]]>
+	</select>
+	
+	<delete id="deleteCate" parameterType="int">
+		<![CDATA[
+			delete from category
+			where cate_no = #{no}
+		]]>
+	</delete>
 	
 
 	

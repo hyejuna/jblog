@@ -77,6 +77,20 @@ public class AdminService {
 		adminDao.insertPost(postVo);
 	}
 	
+	public CategoryVo addCate(CategoryVo cateVo) {
+		System.out.println("[AdminService.addCate()]");
+		
+		adminDao.insertCate(cateVo);
+		int cateNo = cateVo.getCateNo();
+		CategoryVo cVo = adminDao.selectCate(cateNo);
+		return cVo;
+	}
+	
+	public void removeCate(int no) {
+		System.out.println("[AdminService.removeCate()]");
+		
+		adminDao.deleteCate(no);
+	}
 
 
 }

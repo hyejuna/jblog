@@ -46,5 +46,26 @@ public class AdminDao {
 		System.out.println(count+"건 삽입(post)");
 	}
 	
+	public void insertCate(CategoryVo cateVo) {
+		System.out.println("[AdminDao.insertCate()]");
+		
+		int count = sqlSession.insert("admin.insertCate", cateVo);
+		System.out.println(count+"건 삽입(category)");
+	}
+	
+	public CategoryVo selectCate(int cateNo) {
+		System.out.println("[AdminDao.insertCate()]");
+		
+		CategoryVo cVo = sqlSession.selectOne("admin.selectCate", cateNo);
+		return cVo;
+	}
+	
+	public void deleteCate(int no) {
+		System.out.println("[AdminDao.deleteCate()]");
+		
+		int count = sqlSession.delete("admin.deleteCate", no);
+		System.out.println(count +"건 삭제 성공(category)");
+	}
+	
 
 }
