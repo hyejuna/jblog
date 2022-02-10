@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaex.dao.AdminDao;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 
 @Service
 public class AdminService {
@@ -70,6 +71,10 @@ public class AdminService {
 		
 		List<CategoryVo> cateList = adminDao.selectCateList(id);
 		return cateList;
+	}
+	
+	public void write(PostVo postVo) {
+		adminDao.insertPost(postVo);
 	}
 	
 

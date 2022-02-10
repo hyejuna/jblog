@@ -38,6 +38,19 @@
 	
 	</select>
 	
+	<insert id="insertPost" parameterType="com.javaex.vo.PostVo">
+		<![CDATA[
+		insert into post
+		values(
+		    seq_post_no.nextval,
+		    #{cateNo},
+		    #{postTitle},
+		    #{postContent},
+		    sysdate
+		)
+		]]>
+	</insert>
+	
 
 	
 </mapper>

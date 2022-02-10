@@ -39,7 +39,7 @@ public class AdminController {
 		//System.out.println(title);
 		adminService.blogModify(file, title, id);
 		
-		return "redirect:/{id}/admin/basic";
+		return "redirect:basic";
 	}
 	
 	@RequestMapping("/writeForm")
@@ -58,8 +58,9 @@ public class AdminController {
 	@RequestMapping("/write")
 	public String write(@ModelAttribute PostVo postVo) {
 		System.out.println("[AdminController.wirte()]");
-		System.out.println(postVo);
+		//System.out.println(postVo);
 		
-		return "";
+		adminService.write(postVo);
+		return "redirect:writeForm";
 	}
 }

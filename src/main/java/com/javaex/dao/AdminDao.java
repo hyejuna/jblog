@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 
 @Repository
 public class AdminDao {
@@ -36,6 +37,13 @@ public class AdminDao {
 		List<CategoryVo> cateList = sqlSession.selectList("admin.selectCateList", id);
 		return cateList;
 	
+	}
+	
+	public void insertPost(PostVo postVo) {
+		System.out.println("[AdminDao.insertPost()]");
+		
+		int count = sqlSession.insert("admin.insertPost", postVo);
+		System.out.println(count+"건 삽입(post)");
 	}
 	
 
