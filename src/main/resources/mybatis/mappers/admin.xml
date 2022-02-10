@@ -94,6 +94,17 @@
 		]]>
 	</delete>
 	
+	<select id="selectPostList" parameterType="int" resultType="com.javaex.vo.PostVo">
+		<![CDATA[
+			select  post_no postNo,
+			        cate_no cateNo,
+			        post_title postTitle,
+			        post_content postContent,
+			        to_char(reg_date,'yyyy/mm/dd') regDate
+			from post
+			where cate_no = #{no}
+		]]>
+	</select>
 
 	
 </mapper>

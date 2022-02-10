@@ -91,6 +91,12 @@ public class AdminService {
 		
 		adminDao.deleteCate(no);
 	}
-
+	
+	public List<PostVo> getPostList(int cateNo){
+		System.out.println("[AdminService.getPostList()]");
+		
+		List<PostVo> postList = adminDao.selectPostList(cateNo);
+		return postList;
+	}
 
 }

@@ -67,5 +67,12 @@ public class AdminDao {
 		System.out.println(count +"건 삭제 성공(category)");
 	}
 	
+	public List<PostVo> selectPostList(int cateNo){
+		System.out.println("[AdminDao.selectPostList()]");
+		
+		List<PostVo> postList = sqlSession.selectList("admin.selectPostList", cateNo);
+		return postList;
+	}
+	
 
 }
