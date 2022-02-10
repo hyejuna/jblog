@@ -6,23 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.javaex.service.BlogMainService;
-import com.javaex.vo.UserVo;
+import com.javaex.service.AdminService;
+import com.javaex.vo.BlogVo;
 
 @Controller
 public class BlogMainController {
 	
 	@Autowired
-	private BlogMainService blogMainService;
+	private AdminService adminService;
 		
 	@RequestMapping("/{id}")
 	public String blogMain(@PathVariable("id") String id, Model model) {
 		System.out.println("[BlogMainController.blogMain()]");
 		//System.out.println(id);
 				
-		UserVo blogUser = blogMainService.getBlog(id);
-		model.addAttribute("blogUser", blogUser);
-		System.out.println(blogUser);
+		BlogVo blogVo = adminService.getBlog(id);
+		model.addAttribute("blogVo", blogVo);
 		return "blog/blog-main";
 	}
 }

@@ -8,7 +8,7 @@
 <ul class="menu">
 	
 	<c:choose>
-		<c:when test="${empty sessionScope.authUser}">
+		<c:when test="${empty authUser}">
 			<!-- 로그인 전 메뉴 -->
 			<li><a href="${pageContext.request.contextPath}/user/loginForm">로그인</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/joinForm">회원가입</a></li>
@@ -17,7 +17,7 @@
 		<c:otherwise>
 			<!-- 로그인 후 메뉴 -->
 			<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-			<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.id}">내블로그</a></li>
+			<li><a href="${pageContext.request.contextPath}/${authUser.id}">내블로그</a></li>
 		</c:otherwise>
 	</c:choose>
 	
