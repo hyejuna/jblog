@@ -27,6 +27,13 @@ public class UserDao {
 	
 	}
 	
+	public UserVo selectUserId(UserVo userVo) {
+		System.out.println("[UserDao.selectUserId()]");
+		
+		UserVo checkUser = sqlSession.selectOne("user.selectUserId", userVo);
+		return checkUser;
+	}
+	
 	public UserVo selectBlogUser(String id) {
 		System.out.println("[UserDao.selectBlogUser()]");
 		

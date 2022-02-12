@@ -40,6 +40,19 @@ public class UserService {
 		
 	}
 	
+	public String checkId(UserVo userVo) {
+		System.out.println("[UserService.checkId()]");
+		
+		UserVo checkUser = userDao.selectUserId(userVo);
+		
+		if(checkUser == null) {
+			return "success";
+		} else {
+			return "fail";
+		}
+		
+	}
+	
 	public UserVo login(UserVo userVo) {
 		System.out.println("[UserService.login()]");
 		

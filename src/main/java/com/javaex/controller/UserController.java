@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -21,6 +22,15 @@ public class UserController {
 	public String joinForm() {
 		System.out.println("[UserController.joinForm()]");
 		return "user/joinForm";
+	}
+	
+	//아이디 중복확인
+	@ResponseBody
+	@RequestMapping("/checkId")
+	public String checkId(@ModelAttribute UserVo userVo) {
+		System.out.println("[UserController.checkId()]");
+		
+		return userService.checkId(userVo);
 	}
 	
 	@RequestMapping("/join")

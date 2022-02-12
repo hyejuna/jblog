@@ -103,6 +103,7 @@
 			        to_char(reg_date,'yyyy/mm/dd') regDate
 			from post
 			where cate_no = #{no}
+			order by post_no desc
 		]]>
 	</select>
 
