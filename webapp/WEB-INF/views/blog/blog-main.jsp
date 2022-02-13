@@ -70,6 +70,37 @@
 						<!-- postBox -->
 
 						<div id="post">${postVo1.postContent }</div>
+						<br>
+						<div id="commentBox">
+							<table id="commentAdd" border="1">
+								<colgroup>
+									<col style="width: 15%;">
+									<col style="">
+									<col style="width: 15%;">
+								</colgroup>
+								<tr>
+									<td>나혜주</td>
+									<td><input type="text" id="cmtContent" value="" style="width:600px;"></td>
+									<td><button id="btnAddCmt" class="btn_m" type="submit" style="width:85px;">저장</button></td>
+								</tr>
+							</table>
+							<table id="commentList">
+								<colgroup>
+									<col style="width: 10%;">
+									<col style="width: 500px;">
+									<col style="width: 10%;">
+									<col style="width: 5%;">
+								</colgroup>
+								<tr>
+									<td> 나혜주 </td>
+									<td class="text-left"> 좋은글 감사합니다. </td>
+									<td> 2022/02/11 </td>
+									<td><img id="btnCmtDel"src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+								</tr>
+								
+							
+							</table>
+						</div>
 					</c:otherwise>
 				</c:choose>
 				<!-- //post -->
