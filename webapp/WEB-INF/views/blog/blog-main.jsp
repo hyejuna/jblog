@@ -72,18 +72,24 @@
 						<div id="post">${postVo1.postContent }</div>
 						<br>
 						<div id="commentBox">
-							<table id="commentAdd" border="1">
-								<colgroup>
-									<col style="width: 15%;">
-									<col style="">
-									<col style="width: 15%;">
-								</colgroup>
-								<tr>
-									<td>나혜주</td>
-									<td><input type="text" id="cmtContent" value="" style="width:600px;"></td>
-									<td><button id="btnAddCmt" class="btn_m" type="submit" style="width:85px;">저장</button></td>
-								</tr>
-							</table>
+							<c:if test="${!empty authUser}">
+								<table id="commentAdd" border="1">
+									<colgroup>
+										<col style="width: 15%;">
+										<col style="">
+										<col style="width: 15%;">
+									</colgroup>
+									<tr>
+										<td>${authUser.userName }</td>
+										<td>
+											<input type="text" id="cmtContent" value="" style="width:600px;" 
+											data-userno="${authUser.userNo }" data-postno="${postVo1.postNo }">
+										</td>
+										<td><button id="btnAddCmt" class="btn_m" type="submit" style="width:85px;">저장</button></td>
+									</tr>
+								</table>
+							</c:if>
+							
 							<table id="commentList">
 								<colgroup>
 									<col style="width: 10%;">
@@ -91,12 +97,7 @@
 									<col style="width: 10%;">
 									<col style="width: 5%;">
 								</colgroup>
-								<tr>
-									<td> 나혜주 </td>
-									<td class="text-left"> 좋은글 감사합니다. </td>
-									<td> 2022/02/11 </td>
-									<td><img id="btnCmtDel"src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-								</tr>
+
 								
 							
 							</table>
@@ -148,4 +149,73 @@
 	</div>
 	<!-- //wrap -->
 </body>
+
+<script type="text/javascript">
+	/* 코멘트 등록 */
+	$("#btnAddCmt").on("click", function(){
+		console.log("코멘트저장")
+		var userNo = $("#cmtContent").data("userno");
+		var cmtContent = $("#cmtContent").val();
+		var postNo = $("#cmtContent").data("postno");
+		 
+		var cmtVo={
+			 userNo:userNo,
+			 cmtContent:cmtContent,
+			 postNo:postNo
+		};
+		 
+		console.log(cmtVo);
+	});
+	
+	/* 코멘트 리스트 */
+	$(document).ready(function(){
+		//리스트 출력
+		fetchList();
+		console.log("로딩전 리스트 요청");
+	});
+	
+	//리스트 출력
+	function fetchList(){
+		var no = $("#cmtContent").data("postno");
+		$.ajax({
+			url : "${pageContext.request.contextPath }/${blogVo.id}/cmtList",		
+			type : "post",
+			//contentType : "application/json",
+			data : {postNo: no}
+			
+			//dataType : "json",
+			/* success : function(cmtList){
+				
+				console.log(cmtList);
+				
+				for(var i=0; i<cmtList.length; i++){
+					render(cmtList[i], "down");
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			} */
+		});
+	};
+	
+	//리스트 그리기
+	function render(cateVo, updown){
+		var str = '';
+		str += '<tr> ';
+		str += '<td> 나혜주 </td> ';
+		str += '<td class="text-left"> 좋은글 감사합니다. </td> ';
+		str += '<td> 2022/02/11 </td> ';
+		str += '<td><img id="btnCmtDel"src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td> ';
+		str += '</tr> ';
+				
+		if (updown == 'down'){
+			$("#commentList").append(str);
+		} else if (updown == 'up'){
+			$("#commentList").prepend(str);
+		} else {
+			console.log("방향오류")
+		}
+	};
+
+</script>
 </html>

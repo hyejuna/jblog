@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,15 +48,28 @@ public class BlogMainController {
 		map.put("cateList", cateList);
 		
 		model.addAttribute("map", map);
-		System.out.println(map);
+		//System.out.println(map);
 		
 		if(postList.size() !=0) {
 			PostVo postVo1 = postList.get(postNum);
+			String postContent = postVo1.getPostContent();
+			postContent.replace("\n","<br>");
+			postVo1.setPostContent(postContent);
 			model.addAttribute("postVo1",postVo1);	
 		}
 		
 		//System.out.println(postVo1);
 		
 		return "blog/blog-main";
+	}
+	
+	
+	@RequestMapping("/cmtList")
+	public String cmtList(@RequestBody int postNo){
+		System.out.println("[BlogMainController.cmtList()]");
+		
+		System.out.println(postNo);
+		return "";
+		
 	}
 }

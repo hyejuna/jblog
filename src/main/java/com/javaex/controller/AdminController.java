@@ -66,11 +66,6 @@ public class AdminController {
 		System.out.println("[AdminController.wirte()]");
 		//System.out.println(postVo);
 		
-		String content = postVo.getPostContent();
-		content.replace("\r\n", "<br>");
-		content.replace("\n", "<br>");
-		postVo.setPostContent(content);
-		
 		adminService.write(postVo);
 		return "redirect:writeForm";
 	}
